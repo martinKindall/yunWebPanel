@@ -33,7 +33,13 @@ BridgeServer server;
 void setup() {
   // Bridge startup
   pinMode(13, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(8, OUTPUT);
+  
   digitalWrite(13, LOW);
+  digitalWrite(11, LOW);
+  digitalWrite(8, LOW);
+  
   delay(60000);
   Bridge.begin();
   digitalWrite(13, HIGH);
@@ -80,6 +86,13 @@ void process(BridgeClient client) {
   }
 }
 
+void setHeaders(BridgeClient client){
+  //adding headers
+  client.println(F("Status: 200"));
+  client.println(F("Access-Control-Allow-Origin: *"));
+  client.println(); //mandatory blank line
+}
+
 void digitalCommand(BridgeClient client) {
   int pin, value;
 
@@ -96,10 +109,7 @@ void digitalCommand(BridgeClient client) {
   }
 
   // Send feedback to client
-  //adding headers
-  client.println(F("Status: 200"));
-  client.println(F("Access-Control-Allow-Origin: *"));
-  client.println(); //mandatory blank line
+  setHeaders(client);
   
   client.print(F("Pin D"));
   client.print(pin);
@@ -126,6 +136,8 @@ void analogCommand(BridgeClient client) {
     analogWrite(pin, value);
 
     // Send feedback to client
+    setHeaders(client);
+    
     client.print(F("Pin D"));
     client.print(pin);
     client.print(F(" set to analog "));
