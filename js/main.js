@@ -14,6 +14,11 @@ $(document).ready(function(){
 		});
 	});
 
+	$('#slider').mouseup(function(){
+		var value = $(this).val();
+		console.log(value);
+	});
+
 	// $.get(url1, function (response){
 	// 	var statusHTML = '<ul class = "bulleted">';
 	// 	$.each(response, function (index, employee){
