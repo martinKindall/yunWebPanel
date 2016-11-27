@@ -13,24 +13,30 @@
 	<body>
 		<!-- jumbotron -->
 	    <div class="jumbotron jumbotron-fluid bg-info" id="home">
-	      <div class="container text-xs-center">
-	        <h1 class="display-5 my-1">Yun Control</h1>
+			<div class="container text-xs-center">
+				<h1 class="display-5 my-1">Yun Control</h1>
 
-	        <div class="btn-group my-1" role="group" aria-label="Basic example">
-	          <button type="button" class="btn btn-secondary btn-lg" data-toggle="modal" id="off">Off</button>
-	          <a class="btn btn-primary btn-lg" id="on">On</a>
-	        </div>
-	        <div class="input-group my-1">
-	        	<!-- <span></span> -->
-		        <input id="slider" type="range" min=0 max=255 value=125>
-	        </div>
-	      </div>
+				<div class="btn-group my-1" role="group" aria-label="Basic example">
+					<button type="button" class="btn btn-secondary btn-lg" data-toggle="modal" id="off">Off</button>
+					<a class="btn btn-primary btn-lg" id="on">On</a>
+				</div>
+				<div class="input-group my-1">
+					<!-- <span></span> -->
+				    <input id="slider" type="range" min=0 max=255 value=125>
+				</div>
+				<div class="input-group container">
+					<input type="text" class="form-control" placeholder="" id="texto">
+					<span class="input-group-btn">
+						<button class="btn btn-secondary" type="button" id="enviar">Send</button>
+					</span>
+				</div>
+			</div>
 	    </div>
+	    <!-- /jumbotron -->
 	    <ol class="breadcrumb">
 		 	<li class="breadcrumb-item active">Console:</li>
 		 	<li class="breadcrumb-item active" id="console"></li>
 		</ol>
-	    <!-- /jumbotron -->
 
 		<!-- jQuery first, then Tether, then Bootstrap JS. -->
 		<script src="js/jquery-3.1.1.min.js"></script>
