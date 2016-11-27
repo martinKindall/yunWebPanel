@@ -25,10 +25,14 @@
 #include <Bridge.h>
 #include <BridgeServer.h>
 #include <BridgeClient.h>
+#include <LiquidCrystal.h>
 
 // Listen to the default port 5555, the Yún webserver
 // will forward there all the HTTP requests you send
 BridgeServer server;
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(7, 12, 2, 3, 4, 5);
 
 void setup() {
   // Bridge startup
@@ -42,6 +46,7 @@ void setup() {
   
   delay(60000);
   Bridge.begin();
+  lcd.begin(16, 2);
   digitalWrite(13, HIGH);
 
   // Listen for incoming connection only from localhost
@@ -84,6 +89,11 @@ void process(BridgeClient client) {
   if (command == "mode") {
     modeCommand(client);
   }
+
+  // is "lcd" command?
+  if (command == "lcd") {
+    lcdCommand(client);
+  }
 }
 
 void setHeaders(BridgeClient client){
@@ -91,6 +101,28 @@ void setHeaders(BridgeClient client){
   client.println(F("Status: 200"));
   client.println(F("Access-Control-Allow-Origin: *"));
   client.println(); //mandatory blank line
+}
+
+void lcdCommand(BridgeClient client) {
+  String text = client.readStringUntil('/');
+  String text2 = "";
+  lcd.clear();
+  if (text.length()-2 > 16)
+  {
+    text2 = text.substring(16, text.length()-2);
+    lcd.print(text.substring(0,16));
+    lcd.setCursor(0, 1);
+    lcd.print(text2);
+  }
+  else
+  {
+    lcd.print(text.substring(0,text.length()-2));    
+  }
+
+  setHeaders(client);
+  
+  client.print(F("LCD: "));
+  client.print(text);
 }
 
 void digitalCommand(BridgeClient client) {

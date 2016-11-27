@@ -5,31 +5,26 @@ $(document).ready(function(){
 	var textUrl = "/lcd/";
 
 	$('#on').click(function(){
-		$.get(mainUrl+onOffLedUrl+'1', function(response){
-			console.log(response);
-			$("#console").text(response);
-		});
+		getRequest(mainUrl+onOffLedUrl+'1');
 	});
 
 	$('#off').click(function(){
-		$.get(mainUrl+onOffLedUrl+'0', function(response){
-			console.log(response);
-			$("#console").text(response);
-		});
+		getRequest(mainUrl+onOffLedUrl+'0');
 	});
 
 	$('#slider').bind("touchend", function(){
-		$.get(mainUrl+pwmLedUrl+$(this).val(), function(response){
-			console.log(response);
-			$("#console").text(response);
-		});
+		getRequest(mainUrl+pwmLedUrl+$(this).val());
 	});
 
 	$('#enviar').click(function(){
-		// $.get(mainUrl+textUrl+$("#texto").val(), function(response){
-		// 	console.log(response);
-		// 	$("#console").text(response);
-		// });
-		console.log($("#texto").val());
+		getRequest(mainUrl+textUrl+$("#texto").val()+"/");
 	});
 });
+
+function getRequest(url)
+{
+	$.get(url, function(response){
+		console.log(response);
+		$("#console").text(response);
+	});
+}
