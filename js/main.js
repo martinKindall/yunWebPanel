@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var mainUrl = "http://192.168.50.14/arduino";
+	var mainUrl = "http://192.168.XX.XX/arduino";
 	var onOffLedUrl = "/digital/8/";
 	var pwmLedUrl = "/analog/11/";
 	var textUrl = "/lcd/";
